@@ -97,9 +97,9 @@ function getThisWeekOrders(orders) {
  */
 function validateOrderUser(data) {
   const errors = [];
-  if(!data.name){
+  if(!data.name || data.name.trim() === ''){
     errors.push('姓名不可為空');
-  }if(!data.address){
+  }if(!data.address || data.address.trim() === ''){
     errors.push('地址不可為空');
   }if(data.tel.length !== 10 || !data.tel.startsWith('09')){
     errors.push('必須是 09 開頭的 10 位數字');
