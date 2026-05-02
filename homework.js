@@ -101,12 +101,13 @@ function validateOrderUser(data) {
     errors.push('姓名不可為空');
   }if(!data.address || data.address.trim() === ''){
     errors.push('地址不可為空');
-  }if(data.tel.length !== 10 || !data.tel.startsWith('09')){
+  }const telRegex = /^09\d{8}$/;
+  if(!telRegex.test(data.tel)){
     errors.push('必須是 09 開頭的 10 位數字');
   }if(!data.email.includes('@')){
     errors.push('必須包含 @ 符號');
-  }const validPayments = ['ATM', 'Credit Card', 'Apple Pay'];
-  if(!validPayments.includes(data.payment)){
+  }const paymentRegex = /^(ATM|Credit Card|Apple Pay)$/;
+  if(!paymentRegex.test(data.payment)){
     errors.push('付款方式必須是ATM, Credit Card, Apple Pay 其中之一');
   }
   return {isValid:errors.length === 0,errors:errors
